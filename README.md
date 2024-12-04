@@ -1,8 +1,10 @@
 # Experimental configurations and scripts
 
-Experimental is done using [torchtune](https://github.com/pytorch/torchtune), and configurations are stored in yaml files at [configs/llama3_2](configs/llama3_2/).
+This repository contains experimental configurations and scripts for fine-tuning and knowledge distillation.
 
-Run scripts are at [scripts/llama3](scripts/llama3).
+We use [torchtune](https://github.com/pytorch/torchtune) training framework in a separate repository. In thi repository contains torchtune configuraiton yaml files at [configs/llama3_2](configs/llama3_2/) and runner scripts at [scripts/llama3/runner.sh](scripts/llama3/runner.sh).
+
+The directory structure is as follows:
 
 ```bash
 -> % tree -d -L 3
@@ -44,12 +46,10 @@ $ scripts/docker_stop.sh
 
 ## How to run
 
-- inside docker
-
-Run sripts from /workspace
-# workspace/scripts/llama3/runner.sh  main script
+Run the scripts inside docker
 
 ```bash
+
 # FT training
 cd /workspace
 /workspace# workspace/scripts/llama3/runner.sh ft/ft_train_llama3_1-8b_completion.sh  
