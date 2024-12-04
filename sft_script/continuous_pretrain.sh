@@ -16,7 +16,7 @@ LOG_PATH="$WORKSPACE/logs"
 mkdir -p $OUTPUT_PATH
 mkdir -p $LOG_PATH
 
-pushd src
+pushd sft
 python ${DISTRIBUTED_ARGS} finetune.py \
     --bf16 \
     --data_path $DATA_PATH \

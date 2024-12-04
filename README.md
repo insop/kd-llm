@@ -1,39 +1,67 @@
-# Knowledge Distillation for Large Language Models
+# Experimental configurations and scripts
 
-WIP repository for knowledge distillation for large language models
+Experimental is done using [torchtune](https://github.com/pytorch/torchtune), and configurations are stored in yaml files at [configs/llama3_2](configs/llama3_2/).
+
+Run scripts are at [scripts/llama3](scripts/llama3).
+
+```bash
+-> % tree -d -L 3
+.
+├── bin : docker scripts
+├── configs : torch tune configs
+│   └── llama3_2
+│       ├── ft
+│       └── kd
+├── docs
+├── scripts
+│   ├── llama3 : run scripts
+│   │   ├── eval
+│   │   ├── ft
+│   │   └── kd
+│   └── notebooks
+├── sft : stsandalone fine-tuning
+└── sft_script
+```
 
 ## Environment
 
 We use the docker based environment.
+
+- start docker
 ```bash
+$ scripts/docker_start.sh
+```
 
-# TO START DOCKER
-export WORKING_DIR=you_working_dir
-export TAG=nvcr.io/nvidia/pytorch:24.09-py3
-docker run --gpus all -itd --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -v $WORKING_DIR:/workspace --name llm_kd $TAG bash
+- connect to docker
+```bash
+$ scripts/docker_connect.sh
+```
 
-# TO CONNECT TO DOCKER
-docker exec -it llm_kd bash
-
-# TO STOP DOCKER
-docker stop llm_kd
-docker rm llm_kd
+- stop docker
+```bash
+$ scripts/docker_stop.sh
 ```
 
 ## How to run
 
+- inside docker
 
-From the docker container, We use the following command to run the code.
+Run sripts from /workspace
+# workspace/scripts/llama3/runner.sh  main script
 
 ```bash
-bash scripts/continuous_pretrain.sh
-```
+# FT training
+cd /workspace
+/workspace# workspace/scripts/llama3/runner.sh ft/ft_train_llama3_1-8b_completion.sh  
 
+# KD training
+/workspace# workspace/scripts/llama3/runner.sh kd/train_llama3_1-8b-llama3_2-1b_sym_kld.sh
+```
 
 ## Acknoledgements
 
 We acknowledge the following work:
 
-- [OpenCoder-llm](https://github.com/OpenCoder-llm/OpenCoder-llm.git)
-- [SantaCoder](https://github.com/loubnabnl/santacoder-finetuning.git)
+- [torchtune](https://github.com/pytorch/torchtune)
 - [DistiLLM](https://github.com/jongwooko/distillm.git)
+- [EvalPlus](https://github.com/evalplus/evalplus)

@@ -1,0 +1,1 @@
+tune run --nnodes 1 --nproc_per_node 7 lora_finetune_distributed --config llama3_1/8B_lora
